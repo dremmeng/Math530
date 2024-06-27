@@ -1,0 +1,83 @@
+\documentclass[10pt, oneside]{article} 
+\usepackage{amsmath, amsthm, amssymb, calrsfs, wasysym, verbatim, bbm, color, graphics, geometry}
+\usepackage{mathrsfs}
+\geometry{tmargin=.75in, bmargin=.75in, lmargin=.75in, rmargin = .75in}  
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+
+\newcommand{\Cdot}{\boldsymbol{\cdot}}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{conv}{Convention}
+\newtheorem{rem}{Remark}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{example}{Example}
+\newtheorem{exe}{Exercise}
+
+\title{Homework 1.4: [530]}
+\author{[Drew Remmenga]}
+
+
+\begin{document}
+\maketitle
+\pagebreak
+Exercise 2.60  (a)
+12 * $\frac{1}{11}$
+$\mu = 1.091$
+\clearpage
+Exercise 2.60 (b)
+${n \choose k} * p^{k} * (1-p)^{n-k}$
+k= 2, p = $\frac{1}{11}$
+P(k=2) = .2105
+\clearpage
+Exercise 2.60 (c)
+p=.2
+P(k=2) = .2835
+\clearpage
+Exercise 2.62 (a)
+${2 \choose X}*{48 \choose 3-X} / {50 \choose 3}$
+\clearpage
+Exercise 2.62 (b)
+P(X=0) = .8824
+\clearpage
+Exercise 2.62 (c)
+p =.04
+$P(X=0) = {3 \choose 0} * .04^{0} * .96^{3}$
+$P(X=0) = .8847$
+\clearpage
+Exercise 2.64 (a)
+$P(X=x)= {200 \choose x} * p^{x} * (1-p)^{200-x}$
+p = .05
+$P(X\geq 5)=1-P(X < 5) = 1-\sum_{n=0}^{4} P(X=n)$
+$P(x\geq5)=.9736$
+\clearpage
+Exercise 2.64 (b)
+$p \to 0$ as $n \to \infty$ $x \to P(m=np)$ $m=10$
+1-P(x < 5)= .9707
+\clearpage
+Exercise 2.72 (a)
+P(x >10) =P(10<y<15)+P(35<y<65)= (15-10)/75+(65-35)/75 = 7/15
+\clearpage
+Exercise 2.72 (b)
+P(x> 20) = P(45 < y < 55)= 10/75 = 2/15
+\clearpage
+Exercise 2.72 (c) 
+P(x> 10| y > 20) = P(35 < y< 65|y>20)= 6/11 
+\clearpage
+Exercise 2.74 (a)
+$.5 = 1 - e^{-\lambda t}$
+$.5 = e^{-\lambda t}$
+$\frac{1}{\lambda} = 10000$
+$t = 6931.50$
+\clearpage
+Exercise 2.74 (b)
+$e^{-1000/10000} = .9048$
+\clearpage
+Memoryless $\implies$ .9048
+\end{document}
