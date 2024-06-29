@@ -1,0 +1,142 @@
+---
+title: "DSCI/MATH530 RLab 1"
+author: ""
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+This first lab in R is an introduction to using R for computing and looking at data. It is also a different perspective on Module 1. Here we will be computing probabilities and simulating random processes rather working out analytic formulas. 
+
+## Submission 
+- Complete this assignment using R Markdown and convert to pdf. 
+- Submit through gradescope. 
+
+You can also refer to the .Rmd file for this assignment to have an example of this markdown document. Note however, that this version is setup to also use Latex for some math and conversion directly to pdf. 
+
+## Background on R
+This assignment will give some specific hints about using the R language. However, you should look at the R tutorial included in the course pages. 
+(See **>>Start Here** in the top menu and then look for Getting Ready -- the world of R.) for much more details. 
+
+Be careful to use  \verb+ ```{r}+ to begin a code block that will be run.
+Problem  5 has some formatted code blocks but are not run by omitting the 
+\verb+{r}+
+
+Note: In R anything  in the workspace is usually referred to as an *object*. Sometmes these are data sets read in or other results from doing some computations. They might also have specific types, such as vectors, matrices or data frames, but we would call them all objects. 
+
+E.g. ```obj<- 1:10 ``` and we would call ```obj``` an *object* in the workspace and more specifically in this case it is a vector. 
+
+
+## 1 Counting the easy way.
+The following R code generates all possible combinations of rolling 3 dice. \vskip1em
+```{r}
+sampleSpace<- expand.grid( die1= 1:6, die2= 1:6, die3 = 1:6)
+```
+\vskip1em
+
+\noindent a) We know that  ```sampleSpace```  should have  6x6x6 = 216 elements. How would you find this out using functions in R and this created object?
+
+\noindent b) Is ```sampleSpace``` a matrix OR a table OR a list OR a dataframe?
+
+\noindent c) Assign ``` ind<-sampleSpace$die1 == 4 ```. Is ```ind``` numeric, logical, character? What is the result of ```sampleSpace[ind, ]```? How many cases are in this subset?
+
+## 2 Counting a nasty event.
+Based on the setup from problem 1  describe in words the  compound event.
+
+\vskip1em
+
+```{r}
+ind2<- abs(sampleSpace$die1 -sampleSpace$die2) <=2 & 
+        abs(sampleSpace$die2 -sampleSpace$die3) <=2
+```
+\vskip1em
+
+Call this event $A$. By counting elements in $A$ using ```sampleSpace```  and ```ind2``` what is $P(A)$?
+
+## 3 Computing probabilities using built in functions.
+The function ```phyper``` will compute probabilities based on the hypergeometric distribution (see ```help(phyper)``` for more details), 
+the function ```pbinom``` will work for the binomial, and ```ppois``` for the poisson. Note that for each of these R may choose some strange variables names for the distribution parameters. E.g. ```size``` in the binomial is our $n$ from the text. 
+
+\noindent a) Given these functions redo problem 2.62 parts b) and c). 
+
+\noindent b) Redo  a) and b) from problem 2.64.
+
+## 4 The normal distribution. 
+For the normal distribution in R there are a group of functions:
+```pnorm``` the CDF, ```dnorm``` the density function, ```rnorm``` generates a random sample and ```qnorm``` finds the quantile (inverse CDF). See ```help(Normal )``` for all the details. Note that in R the argument *mean* is $\mu$ and *sd* is $\sigma$ from the textbook. 
+
+\noindent a) Explain why we get the following results:
+
+\vskip1em
+
+```{r}
+c(
+  pnorm(0),
+  qnorm(0.5),
+  pnorm(100, mean =100, sd=10),
+  pnorm(100, mean =100, sd=5)
+)
+```
+\vskip1em
+
+\noindent b) Explain why the following samples are not the same,
+
+\vskip1em
+
+```{r}
+rnorm(3)
+rnorm(3)
+```
+
+\vskip1em
+
+\noindent but the following results are the same.
+```{r}
+set.seed(530)
+rnorm(3)
+set.seed(530)
+rnorm(3)
+```
+\vskip1em
+
+\noindent c) Solve problem 2.80 b) by Monte Carlo: Generate a large sample of normal random variables ( using ```rnorm```)
+and determine the fraction in   $[16.0, 16.5]$.
+
+A common shortcut in R is if you have a vector that is a logical (TRUE or FALSE). Then summing up the vector (use the ```sum``` function) is the same as counting the number of TRUE values.  
+
+*For the CS folks:* In applying a numeric function to logicals TRUE is coerced to 1 and FALSE to 0. 
+
+\noindent d) Solve problem 2.80 c) by Monte Carlo: Simulate a large sample of normal random variables, sort them, then find the lower 10th percentile (or use the ```quantile``` function applied to your random sample). Assign this sample to an R object (e.g. ```simNorm```) so that you can use it in problem 5.
+
+## 5 Matching the sample and theoretical densities.
+
+Finally let's see how well your random sample matches the theoretical density.  A histogram of your sample (with green bars and density scaling)
+\vskip1em
+
+```
+hist( simNorm, probability=TRUE, col="green")
+```
+\vskip1em
+
+Now add the normal pdf on top. Range is plus/minus 4 stadnard deviations around mean.
+\vskip1em
+
+```
+xValues<- seq( 16.1 - 4*.5, 16.1 + 4*.5, length.out=250 )
+pdf<- dnorm( xValues, mean=16.1, sd=.5)
+lines(xValues, pdf, col="grey",lwd=2 ) # grey line twice the width
+```
+\vskip1em
+
+Comment on how well your sample histogram  tracks the density curve. Where does it do well? What does it miss?
+
+
+
+
+
+
+
+
