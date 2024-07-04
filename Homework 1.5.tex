@@ -1,0 +1,66 @@
+\documentclass[10pt, oneside]{article} 
+\usepackage{amsmath, amsthm, amssymb, calrsfs, wasysym, verbatim, bbm, color, graphics, geometry}
+\usepackage{mathrsfs}
+\geometry{tmargin=.75in, bmargin=.75in, lmargin=.75in, rmargin = .75in}  
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+
+\newcommand{\Cdot}{\boldsymbol{\cdot}}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{conv}{Convention}
+\newtheorem{rem}{Remark}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+\newtheorem{example}{Example}
+\newtheorem{exe}{Exercise}
+
+\title{Homework 1.5: [530]}
+\author{[Drew Remmenga]}
+
+
+\begin{document}
+\maketitle
+\pagebreak
+Exercise 2.80 (a)
+$P(x<16)=P(z<-.2)=.4207$
+\clearpage
+Exercise 2.80 (b)
+$P(16<x<16.5)=P(-.2<z<.8) = .7881-.4207=.3674$
+\clearpage
+Exercise 2.80 (c)
+$Z=-1.28$
+Z*$\sigma$+$\mu$ = 15.460
+\clearpage
+Exercise 2.82 (a)
+E[X]-E[Y] = .001
+Var[X]+Var[Y] = .00000025
+sd = .0005
+$X-Y ~ N(0.001,0.0005)$
+\clearpage
+Exercise 2.82 (b)
+$P(Y<X) = P(X-Y>0) =.9772$
+\clearpage
+Exercise 2.82 (c)
+P(X=x) = ${n \choose x} p^{x} (1-p)^{n-x}$ p = .9772, n=10
+$P(X\geq 9) = .9793$
+\clearpage
+Exercise 2.87 (a)
+$f_{X{1},X_{2}} = \frac{1}{\sqrt{2\pi}^{2}}e^{-\frac{1}{2}x_{1}^{2}+x_{2}^{2}}$
+$Y_{1}=\frac{X_{1}}{X_{2}}, Y_{2} = X_{2}$
+$X_{1}=Y_{1}Y_{2}, X_{2} = Y_{2}$
+$J = \begin{matrix} Y_{2} & Y_{1} \\
+    0 & 1\end{matrix}$
+$\|J \| =   Y_{2}$
+$f_{Y_{1},Y_{2}}=\frac{Y_{2}}{\sqrt{2\pi}^{2}}e^{y_{2}^{2}(1+y_{1}^{2})}$
+\clearpage
+Exercise 2.87 (b)
+$Y_{1} ~ \frac{e^{-x_{1}^{2}}/2}{\sqrt{2\pi}}/\frac{e^{-x_{2}^{2}/2}}{\sqrt{2\pi}}$
+$Y_{1} ~ \frac{1}{\pi(y_{1}+1)}$
+
+\end{document}
