@@ -1,0 +1,39 @@
+---
+title: "Homework 3,.1"
+author: "Drew Remmenga"
+date: "2024-07-14"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\pagebreak
+Exercise 4.4 (a)
+Categorical variables: sex, future plans, citizenship
+Numerical variables: age at graduation, time to complete degree, class rank, grade point average
+Nominal: Sex, citizenship
+Ordinal: future plans
+Discrete: Class rank
+Cointinuous: Age at graduation, grade point average
+\clearpage
+Exercise 4.4 (b)
+Ratio scale: age at graduation, time to complete degree
+Interval scale: class rank, grade point average
+\clearpage
+Exercise 4.7 (a)
+```{r}
+.146*6276+.087*5212+.386*6928+6127*.494+.465*4094+.581*6397+.346*2417
+```
+```{r}
+library(qcc)
+defect <- c(.146*6276,.087*5212,.386*6928,6127*.494,.465*4094,.581*6397,.346*2417)
+names(defect) <- c("Physical Sciences","Engineering","Life Sciences","Social Sciences","Humanitites","Education","Professional Fields")
+pareto.chart(defect,xab="Categories",ylab="frequency")
+```
+\clearpage
+Exercise 4.7 (b)
+Most degrees are awarded in education with very few in engineering. 
