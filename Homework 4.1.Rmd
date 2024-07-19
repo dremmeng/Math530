@@ -61,10 +61,13 @@ p
 v=.2-.2^(2)
 sqrt(v)
 1-pbinom(30,100,.2)
+
+```
+\newpage
+Exercise 5.14 (c)
+```{r}
 z=(30-20)/4
 1-pnorm(z,0,1)
 answers=rbinom(1,100,.2)
 prop.test(answers,30)
 ```
-\newpage
-Exercise 5.14 (c)
