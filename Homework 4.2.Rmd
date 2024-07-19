@@ -1,0 +1,115 @@
+---
+title: "Homework 4.2"
+author: "Drew Remmenga"
+date: "2024-07-19"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Exercise 5.18
+(a)
+mu =14
+var=28
+(b)
+a=6.57
+b=23.6868
+c=29.1612
+d=6.5705
+e=23.6845
+(c)
+$\chi^{2}_{14,.95}$
+$\chi^{2}_{14,.05}$
+$\chi^{2}_{14,.01}$
+$(\chi^{2}_{14,.95},\chi^{2}_{14,.05})$
+
+(d)
+```{r}
+curve( dchisq(x, df=14), col='red', main = "Chi-Square Density Graph",
+          from=0,to=60)
+xvec <- seq(6.57,60,length=101)
+pvec <- dchisq(xvec,df=14)
+polygon(c(xvec,rev(xvec)),c(pvec,rep(0,length(pvec))),
+        col=adjustcolor("black",alpha=0.3))
+curve( dchisq(x, df=14), col='red', main = "Chi-Square Density Graph",
+          from=0,to=60)
+xvec <- seq(23.686,60,length=101)
+pvec <- dchisq(xvec,df=14)
+polygon(c(xvec,rev(xvec)),c(pvec,rep(0,length(pvec))),
+        col=adjustcolor("black",alpha=0.3))
+curve( dchisq(x, df=14), col='red', main = "Chi-Square Density Graph",
+          from=0,to=60)
+xvec <- seq(29.1612,60,length=101)
+pvec <- dchisq(xvec,df=14)
+polygon(c(xvec,rev(xvec)),c(pvec,rep(0,length(pvec))),
+        col=adjustcolor("black",alpha=0.3))
+curve( dchisq(x, df=14), col='red', main = "Chi-Square Density Graph",
+          from=0,to=60)
+xvec <- seq(6.5705,23.6845,length=101)
+pvec <- dchisq(xvec,df=14)
+polygon(c(xvec,rev(xvec)),c(pvec,rep(0,length(pvec))),
+        col=adjustcolor("black",alpha=0.3))
+```
+Exercise 5.20
+```{r}
+pchisq(2,df=7)
+pchisq(2,df=16)
+pchisq(2,df=21)
+```
+This is incredibly unlikely
+Exercise 5.23
+(a)
+$19c^{20}=\chi^{2}_{19,.10} = 27.203$
+$c=1.197$
+(b)
+5c=6
+Not 5 degrees farenheit
+Exercise 5.25
+(a)
+a=1.812
+b=-2.764
+c=1.472
+d=2.228
+(b)
+$a=t_{10,.05}$
+$b=t_{10,.01}$
+$c=t_{10,.10}$
+$d=t_{10,.025}$
+(c)
+```{r}
+curve( dt(x, df=10), col='red', main = "T Density Graph",
+          from=-10,to=60)
+xvec <- seq(-60,1.812,length=101)
+pvec <- dt(xvec,df=10)
+polygon(c(xvec,rev(xvec)),c(pvec,rep(0,length(pvec))),
+        col=adjustcolor("black",alpha=0.3))
+curve( dt(x, df=10), col='red', main = "T Density Graph",
+          from=-10,to=60)
+xvec <- seq(-60,2.764,length=101)
+pvec <- dt(xvec,df=10)
+polygon(c(xvec,rev(xvec)),c(pvec,rep(0,length(pvec))),
+        col=adjustcolor("black",alpha=0.3))
+curve( dt(x, df=10), col='red', main = "t Density Graph",
+          from=-10,to=60)
+xvec <- seq(-10,1.472,length=101)
+pvec <- dt(xvec,df=10)
+polygon(c(xvec,rev(xvec)),c(pvec,rep(0,length(pvec))),
+        col=adjustcolor("black",alpha=0.3))
+curve( dt(x, df=10), col='red', main = "T Density Graph",
+          from=-10,to=60)
+xvec <- seq(-10,2.228,length=101)
+pvec <- dt(xvec,df=10)
+polygon(c(xvec,rev(xvec)),c(pvec,rep(0,length(pvec))),
+        col=adjustcolor("black",alpha=0.3))
+
+```
+Exercise 5.31
+$F_{v1,v2}= \frac{\chi^{2}_{v1}/v1}{\chi^{2}_{v2}/v2}$
+$1/F_{v1,v2} = \frac{\chi^{2}_{v2}/v2}{\chi^{2}_{v1}/v1}$
+$F_{v1,v2,1-\alpha}=\frac{1}{F_{v2,v1,\alpha}}$
+Exercise 5.33
+.142
+.008
+.498
