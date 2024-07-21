@@ -1,0 +1,26 @@
+---
+title: "Homework 4.3"
+author: "Drew Remmenga"
+date: "2024-07-21"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Exercise 5.34
+$9(1-x)^8\\$
+$9x^{8}\\$
+$x_{5}\\$
+\newpage
+Exercise 5.36 (a)
+WOLG let $X_{1}$ be the min $(X_{1}, X_{2},X_{3})\\$
+$P(T\leq l)= P(x_{1} \leq l)=1-P(x_{1} \geq l)\\$
+$=1-{P(x_{i}\geq l)}^{3}\\$
+$=1-e^{-l/2}\\$
+\newpage
+Exercise 5.36 (b)
+WOLG let $X_{1}$ be the max of $(x_{1}, x_{2}, X_{3})\\$
+$P(T \leq l) = P(x_{1} \leq l)\\$
+$=(1-e^{-l/6})^{3})\\$
