@@ -1,0 +1,45 @@
+---
+title: "Homework 5.1"
+author: "Drew Remmenga"
+date: "2024-07-23"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Exercise 6.2 (a) $E[X_{1}]=\mu \\$
+$E[\frac{X_{2}+X_{3}}{2}]=\frac{2\mu}{2}=\mu \\$
+$E[\hat{\mu_{3}}]=.1*\mu+.2*\mu+.3*\mu+.4*\mu=\mu \\$
+$E[\bar{X}]=\frac{4*\mu}{4}=\mu\\$
+(b)
+$Var[\hat{\mu_{1}}]=\sigma^{2}\\$
+$Var[\hat{\mu_{2}}]=.5\sigma^{2}\\$
+$Var[\hat{\mu_{3}}]=(.1^{2}+.2^{2}+.3^{2}+.4^{2})*\sigma^{2}\\$
+$Var[\hat{\mu_{3}}]=.3\sigma^{2}$
+$Var[\hat{\mu_{4}}]=\frac{4}{16}*\sigma^{2}=\frac{\sigma^{2}}{4}$ This one has the smallest variance. $\\$
+Exercise 6.5 (a)
+$E[\hat{p}_{1}]=p$ unbiased. $\\$
+$E[\hat{p}_{2}]=.5$ unbiased $\\$
+(b)
+$Var[\hat{p}_{1}]=\frac{p(1-p)}{n} \\$
+$Var[\hat{p}_{2}]=0$ this one has the lower variance $\\$
+(c)
+$MSE[\hat{p}_{1}]=0^{2}+\frac{p(1-p)}{n} \\$
+$MSE[\hat{p}_{2}]=0^{2}+0 \\$
+```{r}
+p=seq(from = 0,to = 1,length.out=100)
+msep1=p*(1-p)/4
+msep2=matrix(0,1,100)
+plot(p,msep1,xlab="True P",ylab="MSE")
+points(p,msep2)
+
+```
+Exercise 6.8
+```{r}
+p=.43
+n=611
+error = sqrt(p*(1-p)/n)
+error
+```
