@@ -1,0 +1,258 @@
+---
+title: "DSCI/MATH 530 RLab Four"
+author: " "
+date:  
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+This lab will support finding  confidence intervals for the
+population mean within R and also their interpretation. Also we
+some cover model checking.  For those interested the EXTRA
+CREDIT is an example of a more modern  stats approach where we
+leverage computation to gain some insight not available by
+analytic formulas. 
+
+<!-- 
+Exercise 6.12
+Exercise 6.23
+-->
+Exercise 6.12
+```{r}
+set.seed(123)
+CI=matrix(nrow=25,ncol=2)
+sample_means=numeric(25)
+for (i in 1:25){
+  x1=rnorm(20,50,6)
+  sample_means[i]=mean(x1)
+}
+se=6/sqrt(20)
+sample_means
+for (i in 1:25){
+  me=qt(.975,df=19)*se
+  lower=sample_means[i]-me
+  upper=sample_means[i]+me
+  CI[i,]=c(lower,upper)
+}
+CI
+ c_mu=sum(CI[,1]<=50&CI[,2]>=50)
+ c_mu
+ c_mu=sum(CI[,1]<=53&CI[,2]>=53)
+ c_mu
+ CI=matrix(nrow=25,ncol=2)
+sample_means=numeric(25)
+for (i in 1:25){
+  x1=rnorm(20,50,6)
+  sample_means[i]=mean(x1)
+}
+se=6/sqrt(100)
+sample_means
+for (i in 1:25){
+  me=qt(.975,df=99)*se
+  lower=sample_means[i]-me
+  upper=sample_means[i]+me
+  CI[i,]=c(lower,upper)
+}
+CI
+ c_mu=sum(CI[,1]<=50&CI[,2]>=50)
+ c_mu
+ c_mu=sum(CI[,1]<=53&CI[,2]>=53)
+ c_mu
+```
+Increasing the sample size decreases the size of the confidence interval.  
+\newpage
+Exercise 6.23
+The $alpha$-risk of this rule is the probability of committing a Type I error, which is the probability of rejecting H0 when H0 is true. In this case, the $\alpha$-risk is 5% as the test is performed at the 5% level of significance.
+```{r}
+
+
+n <- 9
+alpha <- 0.05
+type1_errors_mu0 <- 0
+type2_errors_mu0 <- 0
+type1_errors_mu1 <- 0
+type2_errors_mu1 <- 0
+for (i in 1:100) {
+  x <- rnorm(n, mean = 0, sd = 1)
+
+  # Perform a one-sample t-test
+  t_test_result_mu0 <- t.test(x, mu = 1, alternative = "greater")
+
+  # Increment the counter for Type I errors if H0 is rejected
+  if (t_test_result_mu0$p.value < alpha) {
+    type1_errors_mu0 <- type1_errors_mu0 + 1
+  } 
+  else {
+    type2_errors_mu0 <- type2_errors_mu0 + 1
+  }
+  x <- rnorm(n, mean = 1, sd = 1)
+
+  # Perform a one-sample t-test
+  t_test_result_mu1 <- t.test(x, mu = 1, alternative = "greater")
+
+  # Increment the counter for Type I errors if H0 is rejected
+  if (t_test_result_mu1$p.value < alpha) {
+    type1_errors_mu1 <- type1_errors_mu1 + 1
+  } 
+  else {
+    type2_errors_mu1 <- type2_errors_mu1 + 1
+  }
+}
+prop_type1_errors_mu0 <- type1_errors_mu0 / 100
+prop_type2_errors_mu1 <- type2_errors_mu1 / 100
+prop_type1_errors_mu0
+prop_type2_errors_mu1
+```
+
+
+## Submission 
+Please submit through gradescope. Complete this assignment using R Markdown and converting to pdf.  *Make sure each problem is on a separate page.*
+Use  \verb+\newpage+  before each problem to insert a page break.
+
+You can also refer to the .Rmd file for this assignment to have
+an example of this markdown document. Note however, that this
+version is setup to also use Latex for some math and conversion
+directly to pdf. 
+
+\newpage
+##  1. Stats 101!
+This problem is to make sure everyone has the skill to use R and interpret a well defined statistical inference. Also it is real data and,  if you live close to Boulder,  might be interesting. 
+
+## 1(a)
+Load the snowfall data from the  text file 
+```BoulderSnowfall.txt```.  I am also creating a handy subset with just the annual fall/winter season snowfall for 1961 through 2020. 
+
+```{r}
+BoulderSnowfall<-
+       read.table("BoulderSnowfall.txt", header=TRUE )
+# note subscripts based on the names to make this easier to 
+# follow year is also column 14 in the data object.
+year<-    BoulderSnowfall[ ,'Year']  
+snowAllYears<- BoulderSnowfall[, 'Sep.Jun']
+snow<- snowAllYears[year >= 1961]
+```
+
+Create a 95% confidence interval (CI) for mean annual snowfall based on this subset. Do this "by hand", that is, use the R functions 
+```mean```, ```sd``` and ```qnorm``` to get the intermediate computations and assemble. 
+
+Carefully interpret this  CI in words. 
+```{r}
+sm=mean(snow)
+n=length(snow)
+ssd=sd(snow)
+sse=ssd/sqrt(n)
+alpha=.05
+df=n-1
+tscore=qt(p=alpha/2,df=df,lower.tail=FALSE)
+error=tscore*sse
+lower=sm - error
+upper=sm+error
+lower
+upper
+```
+We are 95% confident that the tru emean will lie in this interval.
+## 1(b)
+Here are two classic  and common errors in interpreting a  95\% confidence
+interval for the population mean ( aka $\mu$)
+
+- We are 95\% confident the interval contains 95\% of the observations. 
+- We are 95\% confident the interval contains the sample mean. 
+
+Explain why each of these is *not* correct.
+We are talking about the true mean. WSe are 95% confident the true mean lies in this interval. The sample mean will of course be in the interval.
+
+
+## 1(c)  Some details about data and R. 
+
+- What is the purpose of 
+``` header=TRUE  ``` in the code that reads in the data?
+What is the class of the object ```BoulderSnowfall``
+- Explain why the useful text in the data file is ignored when the file is read. 
+
+Header true gets the data column labels. 
+```{r}
+class(BoulderSnowfall)
+```
+\newpage
+# 2 Model checking 
+We know from the central limit theorem that the sample mean
+will follow a normal distribution with the expectd value being the population mean and we can estimate $\sigma$ using the sample standard deviation. This justifies the CI in general terms from **1**.  However, it is always a good idea to look at the data to check. For example weather data can include **999** as a missing value -- obviously goofing up sample statistics if missed. 
+
+## 2(a)
+Are there any missing observations in these annual snow totals?
+```{r}
+sum(snow==999)
+sum(is.na(snow))
+```
+## 2(b) 
+Create a stem and leaf plot  (i.e. ```stem( snow)``` ) of these data qnd comment on the shape of the distribution. (For a small data set this is better than making a histogram.)
+```{r}
+stem(snow)
+```
+The dtata is mostly clustered around 60 and 80
+## 2(c) 
+Create a probability plot of the data, ```qqnorm( snow) ``` and
+interpret this plot. Use wording and terminology so that
+someone without a statistics course can understand the point of this method.
+```{r}
+qqnorm(snow)
+```
+This data is mostly normally distributed. It contains no outliers.
+
+\newpage
+## 3 Time series plot of the data.
+This feature came as a surprise to me. 
+Make a scatterplot of  the full set of annual data  against the year variable. 
+When time is on the X axis this is called a times series plot. 
+(Carefully label your plot and make it presentation quality.)
+Explain why inference for the population mean is not
+appropriate using the complete data set (1898- 2020).
+```{r}
+scatter.smooth(year,snowAllYears,xlab="Year",ylab="Snow Fall Inches")
+
+```
+The data is not normal.
+
+\newpage
+# 4 EXTRA CREDIT
+
+## 4(a) 
+The following code creates the QQ plot above "by hand" so that
+more stuff can be added to it. Explain the point of 
+the **for** loop and how this figure should be interpreted. 
+
+```{r}
+N<- length( snow)
+frac<- ((1:N) - .5)/N
+Z<- sort( snow )
+ZPerfect<- qnorm( frac)
+
+plot( ZPerfect, Z, xlab="predicted quantile", 
+     ylab="observed quantile")
+
+set.seed(333)
+mu<- mean(snow)
+sigma<- sd( snow)
+for( k in 1:25){
+  Zsim<- sort( 
+          rnorm( N, mean=mu, sd=sigma )
+          )
+  points(ZPerfect, Zsim, col="grey", pch=16 )
+}
+abline( 0,1, col="black", lwd=2)
+points( ZPerfect, Z, col="magenta",pch=16 )
+points( ZPerfect, Z ) # add a pleasing black outline to points
+title("Mystery QQ plot")
+```
+The point of the for loop is to go over the data and sor ti tinto the normal distribution. This graph is to be interpreted by making inferences into the normality of the data.
+
+
+## 4(b)
+Within this problem is buried a hypothesis test! What "null hypothesis" (aka $H_0$ ) is being considered from  a graphical/subjective point of view?
+
+The hypotheis stest is whether the data is normally distributed with true mean equal to mu. 
+
