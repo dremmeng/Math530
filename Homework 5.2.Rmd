@@ -1,0 +1,63 @@
+---
+title: "Homework 5.2"
+author: "Drew Remmenga"
+date: "2024-07-24"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Exercise 6.11 
+(a)
+
+$\bar{x} \pm 1.645*\sigma/\sqrt{n}$ 95% interval.$\\$
+(b)
+```{r}
+30+1.645*10/sqrt(100)
+30-1.645*10/sqrt(100)
+```
+(c)
+95% $\\$
+Exercise 6.13 (a)
+95 $\\$
+(b)
+The width would decrease.
+$\\$
+Exercise 6.14 (a)
+```{r}
+16.3+1.282*6/sqrt(25)
+16.3-1.282*6/sqrt(25)
+16.3+1.645*6/sqrt(25)
+16.3-1.645*6/sqrt(25)
+16.3+2.576*6/sqrt(25)
+16.3-2.576*6/sqrt(25)
+``` 
+(b)
+The widths would decrease. $\\$
+Exercise 6.15 (a)
+```{r}
+110.5+1.960*3/sqrt(10)
+110.5-1.960*3/sqrt(10)
+
+```
+We are 95% confidenct that the true mean lies in this range. Thus the specifications are met 95% of the time in this interval.
+$\\$
+(b)
+```{r}
+110.5-1.645*3/sqrt(10)
+```
+We are 95% confident that the value of the mean voltage will be above this value. Thus the specifications are met.
+$\\$
+(c)
+```{r}
+110.5+1.645*3/sqrt(10)
+```
+We can tell the speicifcation is met at least 95% of the time since this confidence interval is bleow the given value. $\\$
+Exercise 6.16
+50%
+```{r}
+1-.5^(10)
+```
+
