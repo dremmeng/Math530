@@ -1,0 +1,59 @@
+---
+title: "Homework 5.3"
+author: "Drew Remmenga"
+date: "2024-07-24"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+Exercise 6.17 (a)
+$H_{0} P=.54 \\$
+$H_{1} P \neq .54 \\$
+(b)
+
+$H_{0} P\geq .05 \\$
+$H_{1} P < .05 \\$
+(c)
+
+$H_{0} P\geq .40 \\$
+$H_{1} P < .40 \\$
+(d)
+
+$H_{0} P_{gatorade}\leq P_{All sports} \\$
+$H_{1} P_{gatorade} > P_{all sports} \\$
+Exercise 6.19
+a) The null hypothesis should be - The chemical compound used as a food additive is a suspected carcinogen and is not consumed in the safe amount. Not detecting a cancer cause is a serious threat.$\\$
+
+(b) The null hypothesis should be - The new drug is not bioequivalent to the original drug, because that is a critical factor for drug approval by the FDA. If it is incorrectly concluded that the drug is bioequivalent, then a potentially hazardous drug may come out in the market for general use. $\\$
+(c) 
+It is not biologicallyt equivalent should be set up as the null hypothesis as people could get sick otherwise.$\\$
+(d)
+It is effective should be set up as the null hypothesis because believing it is effective is important for preventing drought. 
+$\\$
+Exercise 6.20 (a)
+50% 50%
+$\\$
+(b)
+.25% .75% $\\$
+Exercise 6.27 (a)
+H0 =10 $\\$
+H1< 10 $\\$
+(b)
+```{r}
+z<-(8.7-10)/(2/sqrt(15))
+pnorm(z,0,1)
+```
+refject null hypothesis is there is enough evidenc eto support the claim at .05; $\\$
+(C)
+```{r}
+.1039
+1-.1039
+```
+Exercise 6.30 (a)
+```{r}
+1-.95^20
+```
+(b)
+Whenever there is multiple testing to be done there is increased probability of a type I error. 
