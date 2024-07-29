@@ -1,0 +1,51 @@
+---
+title: "Homework 6.1"
+author: "Drew Remmenga"
+date: "2024-07-29"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Exercise 7.8 (a)
+Test whether PH value of a certain chemical is to be controlled at 5
+H0: The mean ph as no changed from the target value of 5
+H1: The mean Ph as changed from the target value of 5 $\\$
+(b)
+```{r}
+ME=1
+sigma=1
+(2.576^2+sigma^2)/ME^2
+```
+(c)
+```{r}
+z=(4.915-5)/(.2/sqrt(16))
+pnorm(z,mean=0,sd=1)
+```
+Here p value is less than .1 so we reject $H_{0}$.
+$\\$
+Exercise 7.10 (a)
+$H_{0}$ The speedometers have no bias.
+$H_1$ The Speedometers have bias.
+$\\$
+(b)
+```{r}
+(2.326+1.645)^2*1^2/(55.5-55)^(2)
+```
+(c)
+```{r}
+Z=(55.2-55)/(.8/sqrt(64))
+Z
+pnorm(Z,0,1)
+```
+Since 2 is less than 2.326 we fail to reject $H_{0}$. We can not conclude that the speedmeter have a bias.
+$\\$
+(d)
+```{r}
+Z=2.326-(55.5-55)/(.8/sqrt(50))
+1-pnorm(Z,0,1)
+```

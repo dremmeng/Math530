@@ -1,0 +1,39 @@
+---
+title: "Homework 6.2"
+author: "Drew Remmenga"
+date: "2024-07-29"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Exercise 7.12 (a)
+
+```{r}
+68.45-1.6449*3/sqrt(16)
+68.45+1.6449*3/sqrt(16)
+```
+(b)
+
+```{r}
+z=qt(.95,15)
+z
+```
+
+(c)
+
+```{r}
+68.45-z*2.73/sqrt(16)
+68.45+z*2.73/sqrt(16)
+```
+Exercise 7.14 
+```{r}
+t=(4.915-5)/(.2)/sqrt(16)
+pt(t,15)
+```
+p value is greater than .1 so we fail to reject $H_0$
