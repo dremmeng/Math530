@@ -1,0 +1,28 @@
+---
+title: "Homework 6.3"
+author: "Drew Remmenga"
+date: "2024-08-03"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Exercise 7.18 (a)
+```{r}
+n=17
+mu=476.4
+sigma=1.0
+s=.7
+t=(n-1)*(s/sigma)^2
+t
+df=n-1
+pchisq(t,df=df)
+```
+Since p value =.05 we reject the null hypotgesis so the new machine has a statistically significant less variation than the current machiune. 
+$//$
+(b)
+```{r}
+(((n-1)*(s)^2)/qchisq(.95,df=df))^(.5)
+```
