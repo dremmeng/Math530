@@ -1,0 +1,34 @@
+---
+title: "Homework 6.4"
+author: "Drew Remmenga"
+date: "2024-08-03"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Exercise 7.21 (a)
+```{r}
+sigma=.7
+n=16
+mu=476.4
+z1=qnorm(.95,0,1)
+z2=qnorm(.05,0,1)
+mu+z1*sigma/sqrt(16)
+mu+z2*sigma/sqrt(16)
+
+```
+(b)
+```{r}
+mu+z1*(sigma*sqrt(1+1/n))
+
+mu-z1*(sigma*sqrt(1+1/n))
+```
+(c)
+```{r}
+z1=qnorm(.975,0,1)
+mu-z1*sigma/sqrt(16)
+mu+z1*sigma/sqrt(16)
+```
