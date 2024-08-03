@@ -1,0 +1,233 @@
+---
+title: "DSCI/MATH 530 RLab Five"
+author: " "
+date: 
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+This lab will illustrate the concept of power of a hypothesis test. Although the computation s can sometimes get involved the idea is straightforward. We know if the null hypothesis is true and the level is .05 then we will only reject $H_0$ 5 percent of time. This is our error rate. But we are also interested in how often we reject the null when it is false. Ideally this should be with high probability. A power computation will allow us to see if this is the case. 
+
+<!-- 
+7.10,7.15, 7.17, 7.21
+-->
+
+## Submission 
+Please submit through gradescope. Complete this assignment using R Markdown and converting to pdf.  *Make sure each problem is on a separate page.*
+Use  \verb+\newpage+  before each problem to insert a page break.
+
+You can also refer to the .Rmd file for this assignment to have
+an example of this markdown document. Note however, that this
+version is setup to also use Latex for some math and conversion
+directly to pdf. 
+
+\newpage
+##  1. 
+(a)
+$H_0:\mu=55 \\$
+$H_1:\mu \neq 55 \\$
+(b)
+```{r}
+sigma<- 2/3
+alpha<- .01
+beta<- .05
+mu0<- 55
+delta<- .5
+Za2<- qnorm(alpha/2, lower.tail=FALSE)
+Zb<-  qnorm(beta, lower.tail=FALSE)
+n=27.9
+n
+```
+(c)
+```{r}
+t=.2/(.8/sqrt(28))
+t=2.89
+2*pt(-abs(t),df=27)
+```
+Since the p value is less than the significance level we rejected the null hypothesis. 
+$\\$
+(d)
+```{r}
+n=50
+t=2.58+(.5*sqrt(50)/.8-1.645)
+power = 1 - pt(t,df=49)
+power =.554
+power
+```
+\newpage   
+# 2 Extra questions related to Problem 7.10
+
+```{r}
+ pt( abs(t), df= n, lower.tail=FALSE)*2 
+``` 
+
+```{r}
+ pnorm( abs(t) , lower.tail=FALSE)*2
+``` 
+P values change when n is small. t is skewed. These are similar values.
+ 
+\newpage
+# 3 Power curves
+From the previous problem and the text (see equ. 7.9)  we have the following 
+computation for the power
+at any true mean $\mu$ and any sample size $n$ assuming a normal approximation. 
+
+The goal in this problem is create a figure similar to 7.4 but specifically for this
+speedometer testing context. 
+
+```{r}
+n<- 50 
+mu<- 55.5
+mu0<- 55
+sigma<- .8
+delta<- mu - mu0 
+alpha<- .05
+Za2<- qnorm( alpha/2, lower.tail=FALSE)
+power<-  pnorm(   -Za2 + delta/(sigma/sqrt( n)) ) +
+       1 - pnorm(  Za2 + delta/(sigma/sqrt( n)) )
+```
+
+Now consider a sequence of 75 $\mu$ values  
+
+```{r}
+muGrid<- seq( 54, 56, length.out= 75)
+```
+
+## 3(a) 
+Use a **for** loop in R to compute the power at each of this mean values and
+for a sample size of 30 and 50. Be sure to create  empty arrays of length  75 before  the loop  so you will have space to save the power values. 
+
+Plot both power curves with $\mu$ on the X axis and  the power on the Y. 
+Be sure to label the figure completely and add a vertical line at 55 and a horizonal line at .05. Explain why the power curve is exactly equal to .05 when $\mu= 55$. 
+Modest use of color in a figure is always encouraged! To see the available colors in R 
+type ```colors()``` in the console
+
+To add more than one line on a plot  draw one of the curves using the ```plot``` function and then the ```lines``` function to add the second curve. 
+```{r}
+power=numeric(75)
+for (i in 1:75)
+{
+  n<- 50 
+  mu1=muGrid[i]
+  mu0<- 55
+  sigma<- .8
+  delta<- mu - mu1 
+  alpha<- .05
+  Za2<- qnorm( alpha/2, lower.tail=FALSE)
+  power[i]<-  pnorm(   -Za2 + delta/(sigma/sqrt( n)) ) +
+       1 - pnorm(  Za2 + delta/(sigma/sqrt( n)) )
+}
+plot(muGrid,power,xlab="Mu",ylab='Power')
+grid<- seq( .05, .05, length.out= 75)
+lines(muGrid,grid,col='red')
+```
+This is exactly .05 at 55.5 because the difference between mu1 and mu0.
+## 3(b) 
+Find the interval for the $\mu$ grid  so that the power for each case is .8 or less.
+
+Here is a trick in R to find the range of an array  ( i.e. power) that is less than or equal  to some target 
+(.8 in this case). Make sure you understand why this works!
+
+```{r}
+ ind<-  power <= .8 
+ range( muGrid[ind]) 
+```
+
+
+\newpage
+# 4 Testing  the value of a variance. 
+
+From the text there is a Chi-squared test to determine if a variance, $\sigma^2$ 
+(or its square root, $\sigma$) are different than a null hypothesis. 
+ The  test for the variance being larger than a set value is
+\[ H_0: \sigma^2 \le \sigma_0^2 \mbox{ and } H_a: \sigma^2 > \sigma_0^2 \]
+Let 
+\[ W = (n-1) s^2/ \sigma_0^2 \]
+and the  $\alpha$ level test  is 
+reject $H_0$ if  $W$ exceeds the quantile based on a chi squared distribution.  
+Note that this quantile is  easily found in R as
+
+```
+qchisq( alpha, n, lower.tail= FALSE)
+```
+## 4 (a)
+
+From problem 1 setup the hypothesis test that the variance is greater than  $.8^2 =.64$ and for $n=30$.  Determine the quantile for  level .05.
+
+Now  estimate  this quantile by simulation here we generate  1000 realizations of the 
+test statistic under the null hypothesis. Note that the results do not depend on the choice of $\mu$ but we just use $55$ to avoid confusion.   
+
+```{r}
+M<- 10000
+n<- 30 
+mu<- 55
+sigma0<- .8
+W<- rep( NA, 10000)
+set.seed( 111)
+for( k in 1:M ){
+  ySample<- rnorm( n, mu, sigma0)
+  W[k]<- (n-1)* var( ySample)/ sigma0^2
+}
+
+```
+The  relevant quantile is approximated by finding the .95 sample quantile for ```W```.
+Use the code above to find it and compare to the exact expression. Now crank up the Monte Carlo size to 10000. Does the result become more accurate?
+This result becomes tighter when we increase tyhe size of the sample.
+## 4(b) Make a qqplot  ( e.g. ```qqnorm ``` of the distribution from (a) and comment on 
+its similarity to  a normal.  (The sample variance is  sum so it is not unreasonable to expect the central limit theorem might apply. )
+```{r}
+qqnorm(W)
+```
+This is very normal. Notice that there are no signicant outliers.
+## 4(c) EXTRA CREDIT
+For a data set , $Y$ the  $MAD(Y)$ ( median absolute deviation) is an alternative estimate for $\sigma$ and, unlike the sample variance,  is not influenced by a few outliers in the data. 
+The MAD has a simple form. Find the median of the data, find the absolute differences between each data point and the median, and find the median of those differences. 
+The final step is to multiply by the constant $1.4826$ so that the MAD is unbaised for $\sigma$ when the data is normal. 
+In R code we have the simple code line 
+
+```
+absDiff<- abs( ySample - median(ySample) )
+mad<-  1.4826 * median ( absDiff )
+```
+and there is also the handy function ```mad``` to find this in R. 
+Now consider the same hypothesis test in 3(a) but use the test statistic
+$\mbox{WMAD} = \mbox{MAD}( y) / \sigma_0$
+ Adapt the Monte Carlo code from (a) to find the quantile to test the hypothesis
+ ( $n=30$, $\alpha=.05$ ) using this test statistic. 
+ 
+```{r}
+M<- 10000
+n<- 30 
+mu<- 55
+sigma0<- .8
+W<- rep( NA, 10000)
+set.seed( 111)
+for( k in 1:M ){
+  ySample<- rnorm( n, mu, sigma0)
+  absDiff<- abs( ySample - median(ySample) )
+  mad<-  1.4826 * median ( absDiff )
+  W[k]<-mad 
+}
+qqnorm(W)
+```
+<!-- 
+system( " python ../strip_solutions.py RLab5.Rmd -o RLab5ForClass.Rmd" )
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
