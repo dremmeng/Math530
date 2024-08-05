@@ -1,0 +1,38 @@
+---
+title: "Homework 7.1"
+author: "Drew Remmenga"
+date: "2024-08-05"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Exercise 8.3 (a)
+
+Matched pairs.
+$\\$
+(b)
+Matched Pairs
+$\\$
+(c)
+Independent design.
+$\\$
+(d)
+Independent design.
+$\\$
+Excercise 8.4
+(a)
+Observational
+$\\$
+(b)
+Observational.
+$\\$
+(c)
+Experimental.
+$\\$
+(d)
+Experimental.
