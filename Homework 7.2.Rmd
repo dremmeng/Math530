@@ -24,15 +24,15 @@ Exercise 8.9 (a)
 Exercise 8.14 (a)
 ```{r}
 t1=qt(.95,24)
-(27.5-25.5)+t1*(2/25)
-(27.5-25.5)-t1*(2/25)
+(27.5-25.5)+t1*(2/sqrt(25))
+(27.5-25.5)-t1*(2/sqrt(25))
 
 ```
 (b)
 ```{r}
 t1=qt(.95,24)
-37.3-30.6+t1*(13/25)
-37.3-30.6-t1*(13/25)
+37.3-30.6+t1*(13/sqrt(25))
+37.3-30.6-t1*(13/sqrt(25))
 ```
 (c)
 We can conclude it is more difficult to handle a high volume during the holidays. 
