@@ -1,0 +1,39 @@
+---
+title: "Homework 8.2"
+author: "Drew Remmenga"
+date: "2024-08-11"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Exercise 9.12
+```{r}
+a=17
+b=122
+c=31
+d=109
+n=279
+n*((a*d-b*c)^2)/((a+b)*(a+c)*(b+d)*(c+d))
+```
+We accept the null hypthesis there is no significzaant difference in rates for cold in the vitamin c group over placebo.
+
+$\\$
+Exercise 9.16 (a)
+Null hypthesis the proportion of students who chang etheir opeinion from before pro to afyter pro is tyhe same as the proportion of students who change their opinion from before con to after con.
+The alternative hypothesis is that there is a difference in proportions. Use chi-squared test for independence. 
+$\\$
+(b)
+```{r}
+a=2
+b=8
+c=26
+d=16
+chi=5.7083
+chi
+p=.016897
+p
+```
+Since p value is less than the siginicance level you have sufficient evidence to interpret a change in opinion due tot he speeches. We reject the null hypothesis. 
