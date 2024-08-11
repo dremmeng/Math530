@@ -1,0 +1,71 @@
+---
+title: "Homework 8.3"
+author: "Drew Remmenga"
+date: "2024-08-11"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Exercise 9.20 (a) H0: p1=9/16,p2=3/16,p3=3/16,p4=1/16 $\\$
+H1: at least mone proportion is different from the stated version. $\\$
+(b)
+```{r}
+chi=1.269
+df=3
+p=.6895
+p
+chi
+```
+We fail to reject the null hypothesis at the .05 level. $\\$
+Exercise 9.22 (a)
+```{r}
+N=678+227+56+28+8+14
+observed=c(678,227,56,28,8,14)
+expected=c(676.9,224.9,63.1,16.4,3.7,1.1)
+chi=(observed-expected)^2/expected
+chi=21.021
+p=.001
+chi
+p
+```
+Since p is low we reject the null hypothesis.
+(b)
+```{r}
+expected=c(676.9,224.9,85.9,32.8,12.3)
+chi=(observed-expected)^2/expected
+chi=17.239
+p=.002
+chi
+p
+```
+Since p is low we reject the null hypothesis.
+Exercise 9.28 (a) Chi squared of rindependence since we want to find out if they are independent. $\\$
+(b)
+H0: Returned are dpendent on citites. 
+H1: returned depend on type of city.
+(c)
+```{r}
+chi=4.41
+df=3
+```
+Do not reject null hypothesis. $\\$ 
+Exercise 9.30 (a)
+```{r}
+sick=c(31,60)
+notsick=c(77,48)
+treatment=c(31,60)
+placebo=c(60,48)
+
+```
+(b)
+H0:We nare testing being sick is independent of treatment.
+H1: Being sick is not dependent on receiving treatment
+(c)
+```{r}
+chi=15.9698
+df=1
+```
+Since p is low we reject H0 and conclude dramimine is an effective drug. 
